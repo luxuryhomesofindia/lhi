@@ -117,48 +117,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let targetProgress = 0;
     let currentProgress = 0;
-    let velocity = 0;
     let animFrameId = null;
     let renderedFrameIndex = -1;
+    let currentStageTitle = '';
+    let isFadingText = false;
 
-    // Kinetic momentum & gradual hydraulic braking friction loop
+    // Smooth section text fade-up transition helper
+    function updateHudContent(stage) {
+      if (currentStageTitle === stage.title || isFadingText) return;
+      currentStageTitle = stage.title;
+      isFadingText = true;
+
+      // Smoothly fade-out old text upwards
+      if (roomHud) roomHud.classList.add('fade-out');
+
+      setTimeout(() => {
+        if (hudTag) hudTag.textContent = stage.tag;
+        if (hudTitle) hudTitle.textContent = stage.title;
+        if (hudDesc) hudDesc.textContent = stage.desc;
+
+        // Smoothly fade-up new section text
+        if (roomHud) roomHud.classList.remove('fade-out');
+        isFadingText = false;
+      }, 150);
+    }
+
+    // Pure monotonic smooth exponential lerp loop (ZERO back-and-forth wobble)
     function renderLoop() {
-      // Add attraction pull towards exact scroll position + velocity drift
-      const pull = (targetProgress - currentProgress) * 0.04;
-      velocity = (velocity + pull) * 0.91; // 0.91 friction coefficient: creates smooth braking feel
+      const diff = targetProgress - currentProgress;
 
-      currentProgress += velocity;
-
-      // Clamp progress within [0, 1] bounds
-      if (currentProgress < 0) {
-        currentProgress = 0;
-        velocity = 0;
-      } else if (currentProgress > 1) {
-        currentProgress = 1;
-        velocity = 0;
+      // Monotonic smooth lerp (lerp factor 0.09): strictly advances without spring bounce or oscillation
+      if (Math.abs(diff) > 0.0001) {
+        currentProgress += diff * 0.09;
+      } else {
+        currentProgress = targetProgress;
       }
 
-      // Calculate exact frame index from kinetic flight progress
+      // Calculate exact frame index from smooth progress
       const targetFrame = Math.min(totalFrames - 1, Math.max(0, Math.floor(currentProgress * totalFrames)));
 
       if (renderedFrameIndex !== targetFrame) {
         renderedFrameIndex = targetFrame;
         drawFrame(renderedFrameIndex);
+      }
 
-        // Dynamic Room Flight HUD callout logic
-        if (roomHud && currentProgress > 0.05 && currentProgress < 0.98) {
-          const currentStage = roomStages.find(stage => renderedFrameIndex >= stage.minFrame && renderedFrameIndex <= stage.maxFrame);
-          if (currentStage) {
-            if (hudTitle && hudTitle.textContent !== currentStage.title) {
-              if (hudTag) hudTag.textContent = currentStage.tag;
-              hudTitle.textContent = currentStage.title;
-              if (hudDesc) hudDesc.textContent = currentStage.desc;
-            }
-            roomHud.classList.add('visible');
-          }
-        } else if (roomHud) {
-          roomHud.classList.remove('visible');
+      // Dynamic Room Flight HUD section text fade-up callouts
+      if (roomHud && currentProgress > 0.05 && currentProgress < 0.98) {
+        const currentStage = roomStages.find(stage => renderedFrameIndex >= stage.minFrame && renderedFrameIndex <= stage.maxFrame);
+        if (currentStage) {
+          updateHudContent(currentStage);
+          roomHud.classList.add('visible');
         }
+      } else if (roomHud) {
+        roomHud.classList.remove('visible');
+        currentStageTitle = '';
       }
 
       // Update scrub hint progress bar
@@ -178,12 +190,10 @@ document.addEventListener('DOMContentLoaded', () => {
         scrubHint.style.opacity = Math.max(0, 1 - currentProgress * 6);
       }
 
-      // Keep physics loop active while velocity or distance is above rest threshold
-      if (Math.abs(velocity) > 0.00002 || Math.abs(targetProgress - currentProgress) > 0.0002) {
+      // Continue loop until smooth progress settles
+      if (Math.abs(targetProgress - currentProgress) > 0.0001) {
         animFrameId = requestAnimationFrame(renderLoop);
       } else {
-        currentProgress = targetProgress;
-        velocity = 0;
         animFrameId = null;
       }
     }
@@ -192,12 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = heroScrollTrack.getBoundingClientRect();
       const maxScroll = heroScrollTrack.offsetHeight - window.innerHeight;
       const currentScroll = Math.max(0, Math.min(maxScroll, -rect.top));
-      const newTargetProgress = Math.max(0, Math.min(1, currentScroll / maxScroll));
-
-      // Calculate scroll impulse delta and boost velocity momentum
-      const delta = newTargetProgress - targetProgress;
-      velocity += delta * 0.45; // Adds forward momentum whenever user scrolls
-      targetProgress = newTargetProgress;
+      targetProgress = Math.max(0, Math.min(1, currentScroll / maxScroll));
 
       if (!animFrameId) {
         animFrameId = requestAnimationFrame(renderLoop);
