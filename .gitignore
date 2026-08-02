@@ -4,4 +4,3 @@ node_modules/
 make_video.py
 copy_assets.py
 copy_frames.py
-public/

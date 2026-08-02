@@ -14,8 +14,7 @@ const itemsToCopy = [
   'index.html',
   'styles.css',
   'app.js',
-  'assets',
-  'home video'
+  'assets'
 ];
 
 itemsToCopy.forEach(item => {
