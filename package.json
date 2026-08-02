@@ -4,7 +4,8 @@
   "description": "Luxury Homes of India — Premium Architecture, Construction & Turnkey Home Building in Guindy, Chennai",
   "main": "index.html",
   "scripts": {
-    "start": "serve ."
+    "start": "serve .",
+    "build": "node build.js"
   },
   "devDependencies": {
     "serve": "^14.2.4"
