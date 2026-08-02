@@ -115,51 +115,78 @@ document.addEventListener('DOMContentLoaded', () => {
     const hudTitle = document.getElementById('hudTitle');
     const hudDesc = document.getElementById('hudDesc');
 
-    // Pure scroll handler: frame index is strictly locked to scroll progress
-    function updateScrollScrub() {
-      const rect = heroScrollTrack.getBoundingClientRect();
-      const maxScroll = heroScrollTrack.offsetHeight - window.innerHeight;
-      const currentScroll = Math.max(0, Math.min(maxScroll, -rect.top));
-      const progress = Math.max(0, Math.min(1, currentScroll / maxScroll));
+    let targetProgress = 0;
+    let currentProgress = 0;
+    let animFrameId = null;
+    let renderedFrameIndex = -1;
 
-      // Calculate exact frame index from scroll position
-      const targetFrame = Math.min(totalFrames - 1, Math.floor(progress * totalFrames));
+    // Smooth rAF kinetic momentum loop for fluid 30fps/60fps camera flight
+    function renderLoop() {
+      const diff = targetProgress - currentProgress;
 
-      if (currentFrameIndex !== targetFrame) {
-        currentFrameIndex = targetFrame;
-        drawFrame(currentFrameIndex);
+      // Smooth interpolation (lerp speed 0.08 for elegant momentum continuation)
+      if (Math.abs(diff) > 0.0001) {
+        currentProgress += diff * 0.08;
+      } else {
+        currentProgress = targetProgress;
+      }
+
+      // Calculate frame index from smooth momentum progress
+      const targetFrame = Math.min(totalFrames - 1, Math.floor(currentProgress * totalFrames));
+
+      if (renderedFrameIndex !== targetFrame) {
+        renderedFrameIndex = targetFrame;
+        drawFrame(renderedFrameIndex);
+
+        // Dynamic Room Flight HUD callout logic
+        if (roomHud && currentProgress > 0.05 && currentProgress < 0.98) {
+          const currentStage = roomStages.find(stage => renderedFrameIndex >= stage.minFrame && renderedFrameIndex <= stage.maxFrame);
+          if (currentStage) {
+            if (hudTitle && hudTitle.textContent !== currentStage.title) {
+              if (hudTag) hudTag.textContent = currentStage.tag;
+              hudTitle.textContent = currentStage.title;
+              if (hudDesc) hudDesc.textContent = currentStage.desc;
+            }
+            roomHud.classList.add('visible');
+          }
+        } else if (roomHud) {
+          roomHud.classList.remove('visible');
+        }
       }
 
       // Update scrub hint progress bar
       if (scrubProgressFill) {
-        scrubProgressFill.style.width = `${(progress * 100).toFixed(1)}%`;
+        scrubProgressFill.style.width = `${(currentProgress * 100).toFixed(1)}%`;
       }
 
-      // Fade out hero UI cards & text immediately as user starts scrubbing
+      // Fade out hero UI cards & text smoothly as user scrubs
       if (heroContent) {
-        const fadeOpacity = Math.max(0, 1 - progress * 6);
+        const fadeOpacity = Math.max(0, 1 - currentProgress * 6);
         heroContent.style.opacity = fadeOpacity;
-        heroContent.style.transform = `translateY(${progress * -30}px)`;
+        heroContent.style.transform = `translateY(${currentProgress * -30}px)`;
         heroContent.style.pointerEvents = fadeOpacity < 0.1 ? 'none' : 'auto';
       }
 
       if (scrubHint) {
-        scrubHint.style.opacity = Math.max(0, 1 - progress * 6);
+        scrubHint.style.opacity = Math.max(0, 1 - currentProgress * 6);
       }
 
-      // Dynamic Room Flight HUD callout logic
-      if (roomHud && progress > 0.06 && progress < 0.98) {
-        const currentStage = roomStages.find(stage => targetFrame >= stage.minFrame && targetFrame <= stage.maxFrame);
-        if (currentStage) {
-          if (hudTitle && hudTitle.textContent !== currentStage.title) {
-            if (hudTag) hudTag.textContent = currentStage.tag;
-            hudTitle.textContent = currentStage.title;
-            if (hudDesc) hudDesc.textContent = currentStage.desc;
-          }
-          roomHud.classList.add('visible');
-        }
-      } else if (roomHud) {
-        roomHud.classList.remove('visible');
+      // Continue loop until momentum settles
+      if (Math.abs(targetProgress - currentProgress) > 0.0001) {
+        animFrameId = requestAnimationFrame(renderLoop);
+      } else {
+        animFrameId = null;
+      }
+    }
+
+    function updateScrollScrub() {
+      const rect = heroScrollTrack.getBoundingClientRect();
+      const maxScroll = heroScrollTrack.offsetHeight - window.innerHeight;
+      const currentScroll = Math.max(0, Math.min(maxScroll, -rect.top));
+      targetProgress = Math.max(0, Math.min(1, currentScroll / maxScroll));
+
+      if (!animFrameId) {
+        animFrameId = requestAnimationFrame(renderLoop);
       }
     }
 
