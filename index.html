@@ -41,6 +41,13 @@
       <div class="hero-overlay"></div>
       <div class="hero-wordmark">LUXURY HOMES</div>
 
+      <!-- DYNAMIC ROOM FLIGHT HUD OVERLAY -->
+      <div class="room-flight-hud" id="roomFlightHud">
+        <div class="hud-badge-tag" id="hudTag">ARCHITECTURE & FACADE</div>
+        <h3 class="hud-title" id="hudTitle">Grand Entrance & Facade</h3>
+        <p class="hud-desc" id="hudDesc">Double-height glass facade with handcrafted teak fins, cantilevered portico, and ambient landscape lighting.</p>
+      </div>
+
       <!-- Scroll Scrub Progress Indicator -->
       <div class="scroll-scrub-hint" id="scrubHint">
         <span>Scroll to explore portfolio flight</span>
@@ -663,10 +670,17 @@
     </div>
   </footer>
 
-  <!-- LIGHTBOX MODAL -->
+  <!-- LIGHTBOX MODAL WITH ROOM CALLOUT CARD -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose">&times;</button>
-    <img src="" alt="Enlarged View" class="lightbox-img" id="lightboxImg">
+    <div class="lightbox-content-wrap">
+      <img src="" alt="Enlarged View" class="lightbox-img" id="lightboxImg">
+      <div class="lightbox-info-card" id="lightboxInfoCard">
+        <div class="lightbox-tag" id="lightboxTag">ROOM DETAILS</div>
+        <h3 class="lightbox-title" id="lightboxTitle">Master Bedroom</h3>
+        <p class="lightbox-desc" id="lightboxDesc">Crafted with premium materials, structural excellence, and timeless luxury architecture.</p>
+      </div>
+    </div>
   </div>
 
   <!-- CONSULTATION CONFIRMATION MODAL -->
