@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Homes of India — Premium Architecture, Construction & Turnkey Villas | Guindy, Chennai</title>
+  <meta name="description" content="Luxury Homes of India is a premier architecture, construction, and turnkey home-building company in Guindy, Chennai. Specializing in luxury villas, custom residences, and smart interiors since 2015.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- FIXED NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo">
+        LUXURY HOMES<span class="dot"></span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#landmark">Landmark</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="nav-cta">Free Consultation</a>
+    </div>
+  </header>
+
+  <!-- HERO SCROLL TRACK (CAMERA FLIGHT SCRUBBER) -->
+  <div class="hero-scroll-track" id="heroScrollTrack">
+    <div class="hero-sticky-stage" id="heroStickyStage">
+      <!-- Fullscreen Canvas for 60fps Scroll Frame Scrubbing -->
+      <div class="hero-canvas-wrap">
+        <canvas id="heroScrubCanvas" class="hero-canvas"></canvas>
+      </div>
+      
+      <div class="hero-overlay"></div>
+      <div class="hero-wordmark">LUXURY HOMES</div>
+
+      <!-- Scroll Scrub Progress Indicator -->
+      <div class="scroll-scrub-hint" id="scrubHint">
+        <span>Scroll to explore portfolio flight</span>
+        <div class="scrub-progress-bar">
+          <div class="scrub-progress-fill" id="scrubProgressFill"></div>
+        </div>
+      </div>
+
+      <div class="container hero-content" id="heroContent">
+        <div class="hero-text-side">
+          <div class="eyebrow eyebrow-light">
+            <span class="eyebrow-dot"></span> Guindy, Chennai • Operating Since 2015
+          </div>
+          <h1 class="hero-tagline">Crafting Bespoke Architectural Masterpieces.</h1>
+          <div class="hero-subtext">
+            <span>Turnkey Luxury Villas & Custom Residences</span>
+            <div class="rating-badge">
+              <span class="star">★</span> 150+ <span style="opacity: 0.7;">Projects Delivered</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK CONSULTATION / ESTIMATE WIDGET -->
+        <div class="booking-card">
+          <div class="booking-card-header">
+            <h2 class="booking-card-title">Book a Design Consultation</h2>
+            <p class="booking-card-subtitle">Turnkey architecture & luxury construction</p>
+          </div>
+          <form onsubmit="return false;">
+            <div class="booking-form-group">
+              <label class="booking-form-label">Project Type</label>
+              <select id="heroProjectType" class="input-field" style="background: rgba(22, 41, 45, 0.9); cursor: pointer;">
+                <option value="villa">Luxury Villa Construction</option>
+                <option value="turnkey">Turnkey Home Construction</option>
+                <option value="interior">Luxury Interior Execution</option>
+                <option value="renovation">Renovation & Modernization</option>
+                <option value="smart">Smart Home Automation</option>
+              </select>
+            </div>
+            <div class="booking-form-group">
+              <label class="booking-form-label">Approx Built-up Area (Sq Ft)</label>
+              <input type="number" id="heroSqFt" class="input-field" placeholder="e.g. 4500" value="4500">
+            </div>
+            <button type="button" class="booking-btn" id="heroConsultBtn">Get Instant Estimate</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPANY OVERVIEW & VISION (ABOUT) -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span> Company Overview
+          </div>
+          <p class="about-quote">
+            "We go beyond constructing buildings — we create luxury homes tailored to each client's lifestyle, combining architectural vision, structural engineering, and turnkey execution."
+          </p>
+          <p class="section-desc">
+            Headquartered in Lotus Tower, Guindy, Chennai, Luxury Homes of India has been redefining luxury residential architecture since 2015. We offer complete end-to-end design and build services with uncompromising quality control.
+          </p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">2015</div>
+            <div class="stat-label">Operating Since</div>
+            <div class="stat-subtext">Over a decade of excellence</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Luxury Residences</div>
+            <div class="stat-subtext">Villas, interiors & smart homes</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Turnkey Execution</div>
+            <div class="stat-subtext">Concept to final key handover</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3.03 Ac</div>
+            <div class="stat-label">Landmark Resort</div>
+            <div class="stat-subtext">Upcoming hospitality flagship</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISION PILLARS GRID -->
+      <div style="margin-top: 8rem;">
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span> Our Philosophy
+        </div>
+        <h2 class="section-title">Built around six core design pillars.</h2>
+        <div class="checklist-grid" style="grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3.5rem;">
+          <div class="stat-card">
+            <h3 style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--text-dark);">Modern Architecture</h3>
+            <p style="font-size: 0.95rem; color: var(--text-dim);">Clean geometric lines, expansive double-height glass, natural illumination, and seamless indoor-outdoor flow.</p>
+          </div>
+          <div class="stat-card">
+            <h3 style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--text-dark);">Premium Craftsmanship</h3>
+            <p style="font-size: 0.95rem; color: var(--text-dim);">Honed Italian marble, charred teak wood, custom soapstone detailing, and handcrafted finishes.</p>
+          </div>
+          <div class="stat-card">
+            <h3 style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--text-dark);">Sustainable Construction</h3>
+            <p style="font-size: 0.95rem; color: var(--text-dim);">Solar integration, rainwater harvesting, energy-efficient HVAC engineering, and eco-friendly materials.</p>
+          </div>
+          <div class="stat-card">
+            <h3 style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--text-dark);">Smart Home Integration</h3>
+            <p style="font-size: 0.95rem; color: var(--text-dim);">Automated lighting scenes, voice-controlled climate, biometric access control, and centralized audio.</p>
+          </div>
+          <div class="stat-card">
+            <h3 style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--text-dark);">Timeless Design</h3>
+            <p style="font-size: 0.95rem; color: var(--text-dim);">Minimalist luxury aesthetic designed to age gracefully over decades without losing architectural prestige.</p>
+          </div>
+          <div class="stat-card">
+            <h3 style="font-size: 2rem; margin-bottom: 0.75rem; color: var(--text-dark);">End-to-End Management</h3>
+            <p style="font-size: 0.95rem; color: var(--text-dim);">Single-window accountability from architectural blueprints and municipal approvals to final handover.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section class="section amenities-section" id="services">
+    <div class="container">
+      <div class="amenities-header">
+        <div class="eyebrow eyebrow-light">
+          <span class="eyebrow-dot"></span> What We Offer
+        </div>
+        <h2 class="section-title section-title-light">Comprehensive design-and-build solutions.</h2>
+        <p class="section-desc section-desc-light">
+          From greenfield villa construction to custom smart automation, we manage every phase of your luxury residence under one roof.
+        </p>
+      </div>
+
+      <div class="amenities-feature-grid">
+        <!-- Service 1 -->
+        <div class="amenity-feature-card">
+          <div class="amenity-feature-img-wrap">
+            <img src="assets/exterior_day.jpg" alt="Luxury Villa Construction" class="amenity-feature-img" loading="lazy">
+          </div>
+          <div class="amenity-feature-body">
+            <h3 class="amenity-feature-title">Luxury Villa Construction</h3>
+            <p class="amenity-feature-desc">Custom-designed standalone villas built to international structural standards with bespoke finishes.</p>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="amenity-feature-card">
+          <div class="amenity-feature-img-wrap">
+            <img src="assets/hero_exterior.jpg" alt="Turnkey Home Construction" class="amenity-feature-img" loading="lazy">
+          </div>
+          <div class="amenity-feature-body">
+            <h3 class="amenity-feature-title">Turnkey Home Construction</h3>
+            <p class="amenity-feature-desc">Complete end-to-end execution covering civil construction, MEP engineering, interiors, and landscaping.</p>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="amenity-feature-card">
+          <div class="amenity-feature-img-wrap">
+            <img src="assets/great_room.jpg" alt="Architectural Design & Planning" class="amenity-feature-img" loading="lazy">
+          </div>
+          <div class="amenity-feature-body">
+            <h3 class="amenity-feature-title">Architectural Design & Planning</h3>
+            <p class="amenity-feature-desc">3D elevation design, structural blueprints, space planning, and local authority sanction approvals.</p>
+          </div>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="amenity-feature-card">
+          <div class="amenity-feature-img-wrap">
+            <img src="assets/kitchen.jpg" alt="Luxury Interior Execution" class="amenity-feature-img" loading="lazy">
+          </div>
+          <div class="amenity-feature-body">
+            <h3 class="amenity-feature-title">Luxury Interior Execution</h3>
+            <p class="amenity-feature-desc">Bespoke Italian kitchens, custom modular wardrobes, marble cladding, and artisanal lighting fixtures.</p>
+          </div>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="amenity-feature-card">
+          <div class="amenity-feature-img-wrap">
+            <img src="assets/soaking_bath.jpg" alt="Home Renovation & Modernization" class="amenity-feature-img" loading="lazy">
+          </div>
+          <div class="amenity-feature-body">
+            <h3 class="amenity-feature-title">Renovation & Modernization</h3>
+            <p class="amenity-feature-desc">Transforming existing luxury homes with modern facades, structural retrofitting, and high-end upgrades.</p>
+          </div>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="amenity-feature-card">
+          <div class="amenity-feature-img-wrap">
+            <img src="assets/hot_tub_sauna.jpg" alt="Smart Home Automation" class="amenity-feature-img" loading="lazy">
+          </div>
+          <div class="amenity-feature-body">
+            <h3 class="amenity-feature-title">Smart Home Automation</h3>
+            <p class="amenity-feature-desc">Integrated IoT automation for security, motorized blinds, intelligent HVAC, and multi-room audio.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- INCLUDED SERVICES CHECKLIST -->
+      <div class="amenities-checklist">
+        <h3 class="checklist-title">End-to-End Delivery Capabilities</h3>
+        <div class="checklist-grid">
+          <div class="checklist-item"><span class="checklist-dot"></span> Structural Engineering & RCC Framing</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> 3D VR Architectural Walkthroughs</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> Italian Marble & Granite Laying</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> Solar Power & Water Recycling Systems</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> Smart Touch Panel & App Controls</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> Landscaping & Infinity Pools</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> Custom Acoustic Home Theatres</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> Modular German Hardware Kitchens</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> Municipal Building Sanction Support</div>
+          <div class="checklist-item"><span class="checklist-dot"></span> 10-Year Structural Warranty</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT PORTFOLIO SECTION (WITH TABS) -->
+  <section class="section gallery-section" id="projects">
+    <div class="container">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span> Project Portfolio
+      </div>
+      <h2 class="section-title">Architectural landmarks across Chennai & South India.</h2>
+
+      <!-- TAB CONTROLS -->
+      <div class="portfolio-tabs" style="display: flex; gap: 1rem; margin-bottom: 3.5rem;">
+        <button class="nav-cta portfolio-tab active" data-tab="completed" style="background: var(--bg-dark); color: var(--text-light);">Completed Projects (9)</button>
+        <button class="nav-cta portfolio-tab" data-tab="ongoing" style="background: rgba(22, 41, 45, 0.08); color: var(--text-dark);">Ongoing Projects (6)</button>
+        <button class="nav-cta portfolio-tab" data-tab="upcoming" style="background: rgba(22, 41, 45, 0.08); color: var(--text-dark);">Upcoming Projects (4)</button>
+      </div>
+
+      <!-- COMPLETED PROJECTS GRID -->
+      <div class="tab-content active" id="tab-completed">
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="assets/exterior_day.jpg" alt="Devaraj Residence" loading="lazy">
+            <div class="gallery-caption">Devaraj Residence • ECR, Chennai</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/great_room.jpg" alt="Manvikh Residence" loading="lazy">
+            <div class="gallery-caption">Manvikh Residence • Guindy</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/kitchen.jpg" alt="Rangan Residence" loading="lazy">
+            <div class="gallery-caption">Rangan Residence • Adyar</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/primary_suite.jpg" alt="Ganesh Residence" loading="lazy">
+            <div class="gallery-caption">Ganesh Residence • Anna Nagar</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/soaking_bath.jpg" alt="Hashwin Residence" loading="lazy">
+            <div class="gallery-caption">Hashwin Residence • Nungambakkam</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/reading_nook.jpg" alt="Mahesh Residence" loading="lazy">
+            <div class="gallery-caption">Mahesh Residence • Boat Club</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/hot_tub_sauna.jpg" alt="Prabakaran Residence" loading="lazy">
+            <div class="gallery-caption">Prabakaran Residence • OMR</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/fire_pit.jpg" alt="Sri Mandir Residence" loading="lazy">
+            <div class="gallery-caption">Sri Mandir Residence • Poes Garden</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/hero_exterior.jpg" alt="Sunil Residence" loading="lazy">
+            <div class="gallery-caption">Sunil Residence (Renovation) • Velachery</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONGOING PROJECTS GRID -->
+      <div class="tab-content" id="tab-ongoing" style="display: none;">
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="assets/exterior_day.jpg" alt="Shiva Residency" loading="lazy">
+            <div class="gallery-caption">Shiva Residency • Turnkey Villa</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/great_room.jpg" alt="Jeya Residency" loading="lazy">
+            <div class="gallery-caption">Jeya Residency • Custom Architecture</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/primary_suite.jpg" alt="Dharani Residency" loading="lazy">
+            <div class="gallery-caption">Dharani Residency • Luxury Interiors</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/kitchen.jpg" alt="Balaji Residency" loading="lazy">
+            <div class="gallery-caption">Balaji Residency • Smart Home</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/dock_canoe.jpg" alt="Andrew Farmhouse" loading="lazy">
+            <div class="gallery-caption">Andrew Farmhouse • ECR Lakeview</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/soaking_bath.jpg" alt="Annadurai Residence" loading="lazy">
+            <div class="gallery-caption">Annadurai Residence • Modern Renovation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPCOMING PROJECTS GRID -->
+      <div class="tab-content" id="tab-upcoming" style="display: none;">
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="assets/hero_exterior.jpg" alt="Karthikeyan Broadway" loading="lazy">
+            <div class="gallery-caption">Karthikeyan Broadway • Luxury Villa</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/great_room.jpg" alt="Suchitra Kodungaiyur" loading="lazy">
+            <div class="gallery-caption">Suchitra Kodungaiyur • Premium Residence</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/primary_suite.jpg" alt="Mahatma Ramapuram" loading="lazy">
+            <div class="gallery-caption">Mahatma Ramapuram • Smart Home</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/dock_canoe.jpg" alt="Future Landmark Resort" loading="lazy">
+            <div class="gallery-caption">Future Landmark Resort • 3.03 Acre Development</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUTURE LANDMARK RESORT FEATURE SHOWCASE -->
+  <section class="section" id="landmark" style="background-color: var(--bg-dark); color: var(--text-light);">
+    <div class="container">
+      <div class="host-card" style="background-color: var(--bg-dark-card); border-color: rgba(255,255,255,0.12);">
+        <div class="host-avatar-wrap">
+          <img src="assets/dock_canoe.jpg" alt="Future Landmark Resort" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div>
+          <div class="eyebrow eyebrow-light">
+            <span class="eyebrow-dot"></span> Hospitality Flagship Project
+          </div>
+          <h2 class="host-name" style="color: var(--text-light);">Future Landmark Resort</h2>
+          <div class="host-role" style="color: var(--accent-amber);">3.03-Acre Hospitality Development</div>
+          <p class="host-bio" style="color: var(--text-muted);">
+            An ambitious 3.03-acre eco-luxury hospitality resort featuring sustainable architectural villas, serene mirror water ponds, integrated wellness pavilions, and state-of-the-art smart automation.
+          </p>
+          <div class="host-contact-links" style="color: var(--text-light);">
+            <span>3.03 Acres Total Masterplan</span>
+            <span>•</span>
+            <span>Eco-Luxury Architecture</span>
+            <span>•</span>
+            <span style="color: var(--accent-amber);">In Design Phase</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSTRUCTION PROCESS SECTION -->
+  <section class="section" id="process" style="background-color: var(--bg-primary);">
+    <div class="container">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span> Construction Process
+      </div>
+      <h2 class="section-title">Transparent 3-stage project delivery.</h2>
+      
+      <div class="reviews-grid" style="margin-top: 4rem;">
+        <div class="review-card" style="border-top: 4px solid var(--accent-amber);">
+          <div>
+            <div style="font-family: var(--font-display); font-size: 4rem; color: var(--accent-amber); line-height: 1; margin-bottom: 1rem;">01</div>
+            <h3 style="font-family: var(--font-display); font-size: 2.25rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-dark);">Vision & Requirement Gathering</h3>
+            <p class="review-quote" style="font-style: normal; color: var(--text-dim);">
+              We conduct in-depth lifestyle consultations, analyze site orientation and soil conditions, establish budget parameters, and map out your complete functional requirements.
+            </p>
+          </div>
+        </div>
+
+        <div class="review-card" style="border-top: 4px solid var(--accent-amber);">
+          <div>
+            <div style="font-family: var(--font-display); font-size: 4rem; color: var(--accent-amber); line-height: 1; margin-bottom: 1rem;">02</div>
+            <h3 style="font-family: var(--font-display); font-size: 2.25rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-dark);">Design & Customization</h3>
+            <p class="review-quote" style="font-style: normal; color: var(--text-dim);">
+              Our architects craft 3D photorealistic renderings, structural engineering blueprints, Italian marble and wood material selections, and municipal approval filings.
+            </p>
+          </div>
+        </div>
+
+        <div class="review-card" style="border-top: 4px solid var(--accent-amber);">
+          <div>
+            <div style="font-family: var(--font-display); font-size: 4rem; color: var(--accent-amber); line-height: 1; margin-bottom: 1rem;">03</div>
+            <h3 style="font-family: var(--font-display); font-size: 2.25rem; font-weight: 400; margin-bottom: 1rem; color: var(--text-dark);">Execution & Handover</h3>
+            <p class="review-quote" style="font-style: normal; color: var(--text-dim);">
+              Our engineering team executes turnkey construction with strict quality checks, smart home integration, interior fit-outs, and pristine white-glove key handover.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="section reviews-section" id="testimonials">
+    <div class="container">
+      <div class="reviews-header-wrap">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span> Client Testimonials
+          </div>
+          <h2 class="section-title">Trusted by homeowners across South India.</h2>
+        </div>
+        <div class="rating-badge" style="background: rgba(22, 41, 45, 0.05); border-color: rgba(22, 41, 45, 0.1); color: var(--text-dark); font-size: 1.1rem; padding: 0.6rem 1.25rem;">
+          <span class="star">★</span> 5.0 <span style="opacity: 0.7;">· 100% Satisfaction</span>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "Luxury Homes of India delivered our dream villa at ECR on time and within budget. Their structural engineering and marble interior work surpassed all expectations."
+            </p>
+          </div>
+          <div>
+            <div class="review-author">Devaraj & Family</div>
+            <div class="review-location">Devaraj Residence • ECR Chennai</div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "The turnkey process was completely stress-free. From 3D approval to key handover, their project management in Guindy was flawless."
+            </p>
+          </div>
+          <div>
+            <div class="review-author">Manvikh K.</div>
+            <div class="review-location">Manvikh Residence • Guindy</div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-quote">
+              "Their attention to detail in smart home automation and modern facade design makes our residence stand out in Anna Nagar."
+            </p>
+          </div>
+          <div>
+            <div class="review-author">Ganesh S.</div>
+            <div class="review-location">Ganesh Residence • Anna Nagar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTIMATE CALCULATOR & CONSULTATION SECTION -->
+  <section class="section rates-section" id="estimate">
+    <div class="container">
+      <div class="rates-grid">
+        <div>
+          <div class="eyebrow eyebrow-light">
+            <span class="eyebrow-dot"></span> Budget Estimator
+          </div>
+          <h2 class="rates-info-title">Transparent project pricing.</h2>
+          
+          <div class="rates-price-tag">
+            <span class="price-val">₹3,400</span>
+            <span class="price-period">/ sq ft starting construction rate</span>
+          </div>
+
+          <ul class="rates-feature-list">
+            <li class="rates-feature-item"><span class="checklist-dot"></span> High-grade Fe-550 TMT Steel & Ultratech Cement</li>
+            <li class="rates-feature-item"><span class="checklist-dot"></span> Italian Marble Flooring & Kohler / Grohe Fittings</li>
+            <li class="rates-feature-item"><span class="checklist-dot"></span> Teak Wood Main Doors & Double Glazed Windows</li>
+            <li class="rates-feature-item"><span class="checklist-dot"></span> 10-Year Structural Guarantee & Free 1-Year Maintenance</li>
+          </ul>
+        </div>
+
+        <!-- WORKING ESTIMATE CALCULATOR PANEL -->
+        <div class="booking-panel">
+          <h3 class="booking-panel-title">Estimate Project Cost</h3>
+          <form onsubmit="return false;">
+            <div class="panel-row">
+              <label class="panel-label">Built-Up Area (Sq Ft)</label>
+              <input type="number" id="calcArea" class="input-field" value="4000" min="1000" step="100">
+            </div>
+
+            <div class="panel-row">
+              <label class="panel-label">Construction Package</label>
+              <select id="calcPackage" class="input-field" style="background: rgba(22, 41, 45, 0.9); cursor: pointer;">
+                <option value="3400">Premium Villa (₹3,400 / sq ft)</option>
+                <option value="4200">Luxury Royal Villa (₹4,200 / sq ft)</option>
+                <option value="5500">Ultra-Luxury Smart Villa (₹5,500 / sq ft)</option>
+              </select>
+            </div>
+
+            <div class="calc-breakdown">
+              <div class="breakdown-row">
+                <span id="breakdownAreaText">4,000 sq ft × ₹3,400</span>
+                <span id="breakdownCivil">₹1,36,00,000</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Architectural & Structural Fee</span>
+                <span id="breakdownArch">Included</span>
+              </div>
+              <div class="breakdown-row">
+                <span>Project Management & Approvals</span>
+                <span id="breakdownMgmt">Included</span>
+              </div>
+              <div class="breakdown-row total">
+                <span>Estimated Turnkey Cost</span>
+                <span id="breakdownTotal" style="color: var(--accent-amber);">₹1,36,00,000</span>
+              </div>
+            </div>
+
+            <button type="button" class="booking-btn" id="calcBookBtn">Schedule Office Meeting</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT & HEADQUARTERS SECTION -->
+  <section class="section host-section" id="contact">
+    <div class="container">
+      <div class="host-card">
+        <div class="host-avatar-wrap">
+          <img src="assets/exterior_day.jpg" alt="Lotus Tower Office" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span> Head Office
+          </div>
+          <h2 class="host-name">Luxury Homes of India</h2>
+          <div class="host-role">Architecture & Turnkey Construction</div>
+          <p class="host-bio">
+            Visit our corporate office at Lotus Tower, Guindy for a private architectural consultation, material sampling, and 3D VR project preview.
+          </p>
+          <div style="margin-bottom: 2rem; font-size: 1rem; color: var(--text-dark); line-height: 1.8;">
+            <strong>Address:</strong> 85, 4th Floor, Lotus Tower, Guindy, Chennai – 600032, Tamil Nadu<br>
+            <strong>Primary Contact:</strong> +91 90922 76222<br>
+            <strong>Direct Desk:</strong> +91 90030 03111<br>
+            <strong>Email:</strong> info@luxuryhomesofindia.in
+          </div>
+          <div class="host-contact-links">
+            <a href="mailto:info@luxuryhomesofindia.in">info@luxuryhomesofindia.in</a>
+            <span>·</span>
+            <a href="tel:+919092276222">+91 90922 76222</a>
+            <span>·</span>
+            <a href="tel:+919003003111">+91 90030 03111</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING FILM SECTION -->
+  <section class="closing-film-section">
+    <div class="closing-video-wrap">
+      <img src="assets/hero_exterior.jpg" alt="Luxury Homes Closing Film" class="hero-poster">
+      <video id="closingVidA" class="closing-video-layer active" autoplay muted playsinline loop src="assets/hero_video.mp4"></video>
+    </div>
+    <div class="closing-film-overlay"></div>
+    <div class="closing-film-content">
+      <h2 class="closing-quote">Where Vision Meets Precision.</h2>
+      <a href="#contact" class="nav-cta" style="padding: 1rem 2.5rem; font-size: 1rem;">Book Free Consultation</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#" class="brand-logo" style="margin-bottom: 1.25rem;">
+            LUXURY HOMES<span class="dot"></span>
+          </a>
+          <p style="max-width: 360px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7;">
+            Luxury Homes of India — Premium architecture, construction, and turnkey luxury villa building in Guindy, Chennai. Operating since 2015.
+          </p>
+        </div>
+        <div style="display: flex; gap: 5rem;">
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 1.25rem;">Navigation</div>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem; color: var(--text-light);">
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#process">Construction Process</a></li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 1.25rem;">Contact & Office</div>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.95rem; color: var(--text-light);">
+              <li>Lotus Tower, Guindy, Chennai</li>
+              <li>+91 90922 76222</li>
+              <li>+91 90030 03111</li>
+              <li>info@luxuryhomesofindia.in</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-wordmark">LUXURY HOMES</div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Luxury Homes of India. All rights reserved. Operating since 2015.</div>
+        <div>Guindy, Chennai – 600032</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <img src="" alt="Enlarged View" class="lightbox-img" id="lightboxImg">
+  </div>
+
+  <!-- CONSULTATION CONFIRMATION MODAL -->
+  <div class="modal-backdrop" id="bookingModal">
+    <div class="modal-content">
+      <div class="modal-icon">✓</div>
+      <h3 class="modal-title">Consultation Requested</h3>
+      <p class="modal-desc">
+        Thank you for contacting Luxury Homes of India. Our senior architectural team from Guindy office will contact you within 2 hours.
+      </p>
+      <button type="button" class="nav-cta" id="modalCloseBtn" style="width: 100%;">Close</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

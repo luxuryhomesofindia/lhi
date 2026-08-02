@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.log
+make_video.py
+copy_assets.py
+copy_frames.py
