@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "luxury-homes-of-india",
+  "outputDirectory": ".",
   "cleanUrls": true,
   "headers": [
     {
