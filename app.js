@@ -117,22 +117,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let targetProgress = 0;
     let currentProgress = 0;
+    let velocity = 0;
     let animFrameId = null;
     let renderedFrameIndex = -1;
 
-    // Smooth rAF kinetic momentum loop for fluid 30fps/60fps camera flight
+    // Kinetic momentum & gradual hydraulic braking friction loop
     function renderLoop() {
-      const diff = targetProgress - currentProgress;
+      // Add attraction pull towards exact scroll position + velocity drift
+      const pull = (targetProgress - currentProgress) * 0.04;
+      velocity = (velocity + pull) * 0.91; // 0.91 friction coefficient: creates smooth braking feel
 
-      // Smooth interpolation (lerp speed 0.08 for elegant momentum continuation)
-      if (Math.abs(diff) > 0.0001) {
-        currentProgress += diff * 0.08;
-      } else {
-        currentProgress = targetProgress;
+      currentProgress += velocity;
+
+      // Clamp progress within [0, 1] bounds
+      if (currentProgress < 0) {
+        currentProgress = 0;
+        velocity = 0;
+      } else if (currentProgress > 1) {
+        currentProgress = 1;
+        velocity = 0;
       }
 
-      // Calculate frame index from smooth momentum progress
-      const targetFrame = Math.min(totalFrames - 1, Math.floor(currentProgress * totalFrames));
+      // Calculate exact frame index from kinetic flight progress
+      const targetFrame = Math.min(totalFrames - 1, Math.max(0, Math.floor(currentProgress * totalFrames)));
 
       if (renderedFrameIndex !== targetFrame) {
         renderedFrameIndex = targetFrame;
@@ -159,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrubProgressFill.style.width = `${(currentProgress * 100).toFixed(1)}%`;
       }
 
-      // Fade out hero UI cards & text smoothly as user scrubs
+      // Fade out hero UI cards & text smoothly
       if (heroContent) {
         const fadeOpacity = Math.max(0, 1 - currentProgress * 6);
         heroContent.style.opacity = fadeOpacity;
@@ -171,10 +178,12 @@ document.addEventListener('DOMContentLoaded', () => {
         scrubHint.style.opacity = Math.max(0, 1 - currentProgress * 6);
       }
 
-      // Continue loop until momentum settles
-      if (Math.abs(targetProgress - currentProgress) > 0.0001) {
+      // Keep physics loop active while velocity or distance is above rest threshold
+      if (Math.abs(velocity) > 0.00002 || Math.abs(targetProgress - currentProgress) > 0.0002) {
         animFrameId = requestAnimationFrame(renderLoop);
       } else {
+        currentProgress = targetProgress;
+        velocity = 0;
         animFrameId = null;
       }
     }
@@ -183,7 +192,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = heroScrollTrack.getBoundingClientRect();
       const maxScroll = heroScrollTrack.offsetHeight - window.innerHeight;
       const currentScroll = Math.max(0, Math.min(maxScroll, -rect.top));
-      targetProgress = Math.max(0, Math.min(1, currentScroll / maxScroll));
+      const newTargetProgress = Math.max(0, Math.min(1, currentScroll / maxScroll));
+
+      // Calculate scroll impulse delta and boost velocity momentum
+      const delta = newTargetProgress - targetProgress;
+      velocity += delta * 0.45; // Adds forward momentum whenever user scrolls
+      targetProgress = newTargetProgress;
 
       if (!animFrameId) {
         animFrameId = requestAnimationFrame(renderLoop);
